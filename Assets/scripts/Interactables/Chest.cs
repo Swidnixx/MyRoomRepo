@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-internal partial class Chest : Selectable
+public class Chest : Selectable
 {
     public enum State
     {
@@ -16,12 +16,15 @@ internal partial class Chest : Selectable
     public Transform ChestTop;
     public float openSpeed = 7;
     #endregion
-
+    private bool switchingState = false;
+    private bool keyLocked = false;
     public State state { get; private set; } = State.Closed;
 
     #region Logic
     public override ICommand Clicked()
     {
+        if (switchingState)
+            return null;
         switch (state)
         {
             case State.Closed:
@@ -33,12 +36,17 @@ internal partial class Chest : Selectable
 
         return null;
     }
+    public void Reset()
+    {
+        keyLocked = false;
+    }
     private string Close()
     {
         GameManager.instance.player.SetKey(null);
 
-        StartCoroutine(RotateToMatch(0));
         state = State.Closed;
+        switchingState = true;
+        StartCoroutine(RotateToMatch(0));
 
         Door door = FindObjectOfType<Door>();
         door.Close();
@@ -47,10 +55,15 @@ internal partial class Chest : Selectable
     }
     private string Open()
     {
-        StartCoroutine(RotateToMatch(-130));
         state = State.Open;
+        switchingState = true;
+        StartCoroutine(RotateToMatch(-130));
 
-        Instantiate(key, transform.position, Quaternion.identity);
+        if (!keyLocked)
+        {
+            Instantiate(key, transform.position, Quaternion.identity).GetComponent<Key>().chest = this;
+            keyLocked = true;
+        }
 
         return "Chest has been opened";
     }
@@ -63,9 +76,14 @@ internal partial class Chest : Selectable
         Quaternion toRot = Quaternion.Euler(new Vector3(ChestTop.rotation.x, ChestTop.rotation.y, targetRot));
         while (Quaternion.Angle(ChestTop.localRotation, toRot) > 3.5f)
         {
-            ChestTop.rotation *= Quaternion.AngleAxis(Time.deltaTime * openSpeed, Vector3.back);
+            if(state == State.Open)
+                ChestTop.rotation *= Quaternion.AngleAxis(Time.deltaTime * openSpeed, Vector3.back);
+            else
+                ChestTop.rotation *= Quaternion.AngleAxis(Time.deltaTime * openSpeed, Vector3.forward);
             yield return null;
         }
+        ChestTop.rotation = toRot;
+        switchingState = false;
     }
     #endregion
 }

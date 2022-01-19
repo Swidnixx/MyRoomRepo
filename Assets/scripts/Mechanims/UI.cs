@@ -83,8 +83,10 @@ public class UI : MonoBehaviour
     {
         if (currentSelected && !locked)
         {
-            Lock();
             currentCommand = currentSelected.Clicked();
+            if (currentCommand == null)
+                return;
+            Lock();
             wi.PromptPlayer(currentCommand.title, currentCommand.msg, WindowInfo.Response.YesNo, OnPlayerResponded, "no");
         }
     }

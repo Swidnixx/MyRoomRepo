@@ -7,6 +7,7 @@ public class Key : Selectable
     //  Dependencies
     Player player;
     AudioSystem sa;
+    public Chest chest;
 
     [SerializeField]
     private AudioClip clip;
@@ -17,6 +18,7 @@ public class Key : Selectable
     {
         player = GameManager.instance.player;
         sa = GameManager.instance.audioSystem;
+      
         base.Start();
         StartCoroutine(Reveal());
     }
@@ -28,6 +30,7 @@ public class Key : Selectable
     }
     private string Pick()
     {
+        chest.Reset();
         player.SetKey(this);
         Invoke("destroy", 0.1f);
         return "Key picked";

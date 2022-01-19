@@ -219,6 +219,40 @@ Transform:
   m_Father: {fileID: 1586565316}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &174096641 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 86918909963847308, guid: f0e6971a45ea64248b2ce90ea27f1222, type: 3}
+  m_PrefabInstance: {fileID: 86918910728137896}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &174096642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174096641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 174096643}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
+--- !u!114 &174096643 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 86918909963847296, guid: f0e6971a45ea64248b2ce90ea27f1222, type: 3}
+  m_PrefabInstance: {fileID: 86918910728137896}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174096641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69877b745fb7f7448a90629c7827465e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &386555209
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,6 +490,7 @@ GameObject:
   - component: {fileID: 912399474}
   - component: {fileID: 912399473}
   - component: {fileID: 912399472}
+  - component: {fileID: 912399475}
   m_Layer: 0
   m_Name: _AudioManager
   m_TagString: Untagged
@@ -585,6 +620,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &912399475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912399471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 912399473}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,6 +885,7 @@ GameObject:
   - component: {fileID: 1748807036}
   - component: {fileID: 1748807035}
   - component: {fileID: 1748807039}
+  - component: {fileID: 1748807040}
   m_Layer: 5
   m_Name: _Canvas
   m_TagString: Untagged
@@ -936,6 +990,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: {fileID: 2133188101}
   maxSelectingDistance: 14
+--- !u!114 &1748807040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748807034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1748807039}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!4 &1898147228 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5829825276806117231, guid: d1dc61223abb43748b7ffadf7dd2cb71, type: 3}
@@ -972,6 +1044,7 @@ GameObject:
   - component: {fileID: 2011591216}
   - component: {fileID: 2011591217}
   - component: {fileID: 2011591218}
+  - component: {fileID: 2011591214}
   m_Layer: 0
   m_Name: _Player
   m_TagString: Player
@@ -979,6 +1052,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2011591214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011591213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 2011591216}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!4 &2011591215
 Transform:
   m_ObjectHideFlags: 0
