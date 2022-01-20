@@ -17,7 +17,7 @@
                     "name": "LookLeftRight",
                     "type": "Value",
                     "id": "bd25a395-7843-43cf-8208-fb702208a2dd",
-                    "expectedControlType": "Stick",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
                 },
@@ -34,6 +34,14 @@
                     "type": "Value",
                     "id": "3d0baf80-62c3-407e-bcc9-d08b760cad57",
                     "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "LookAround",
+                    "type": "Value",
+                    "id": "447c00e6-8bf6-4c28-b08a-85274c10a7a8",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 }
@@ -223,6 +231,17 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a97b93e7-d4f1-4939-bc81-689ffceee807",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "LookAround",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

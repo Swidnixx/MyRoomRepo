@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/MyRoomControls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Resources/MyRoomControls.inputactions'
 
 using System;
 using System.Collections;
@@ -30,7 +30,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""name"": ""LookLeftRight"",
                     ""type"": ""Value"",
                     ""id"": ""bd25a395-7843-43cf-8208-fb702208a2dd"",
-                    ""expectedControlType"": ""Stick"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -47,6 +47,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""3d0baf80-62c3-407e-bcc9-d08b760cad57"",
                     ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""LookAround"",
+                    ""type"": ""Value"",
+                    ""id"": ""447c00e6-8bf6-4c28-b08a-85274c10a7a8"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -238,6 +246,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a97b93e7-d4f1-4939-bc81-689ffceee807"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""LookAround"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -412,6 +431,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Player_LookLeftRight = m_Player.FindAction("LookLeftRight", throwIfNotFound: true);
         m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
         m_Player_LookUpDown = m_Player.FindAction("LookUpDown", throwIfNotFound: true);
+        m_Player_LookAround = m_Player.FindAction("LookAround", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
@@ -469,6 +489,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_LookLeftRight;
     private readonly InputAction m_Player_Click;
     private readonly InputAction m_Player_LookUpDown;
+    private readonly InputAction m_Player_LookAround;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -477,6 +498,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @LookLeftRight => m_Wrapper.m_Player_LookLeftRight;
         public InputAction @Click => m_Wrapper.m_Player_Click;
         public InputAction @LookUpDown => m_Wrapper.m_Player_LookUpDown;
+        public InputAction @LookAround => m_Wrapper.m_Player_LookAround;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -498,6 +520,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @LookUpDown.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookUpDown;
                 @LookUpDown.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookUpDown;
                 @LookUpDown.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookUpDown;
+                @LookAround.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookAround;
+                @LookAround.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookAround;
+                @LookAround.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookAround;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -514,6 +539,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @LookUpDown.started += instance.OnLookUpDown;
                 @LookUpDown.performed += instance.OnLookUpDown;
                 @LookUpDown.canceled += instance.OnLookUpDown;
+                @LookAround.started += instance.OnLookAround;
+                @LookAround.performed += instance.OnLookAround;
+                @LookAround.canceled += instance.OnLookAround;
             }
         }
     }
@@ -610,6 +638,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnLookLeftRight(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);
         void OnLookUpDown(InputAction.CallbackContext context);
+        void OnLookAround(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
