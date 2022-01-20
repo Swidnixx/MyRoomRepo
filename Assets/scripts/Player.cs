@@ -91,31 +91,20 @@ public class Player : MonoBehaviour
     #region Private Methods
     private void CameraMovement()
     {
-        float rotY = lookLeftRight.ReadValue<float>() * Time.deltaTime * lookLeftSpeed * 70;
-        //Quaternion toRot = transform.rotation * Quaternion.AngleAxis(rotY, Vector3.up);
-        Quaternion toRot = transform.rotation * Quaternion.Euler(Vector3.up * rotY);
-        //cam.transform.RotateAround(transform.position, Vector3.up, rotY);
-        //cam.transform.rotation = Quaternion.LookRotation((transform.position - cam.transform.position));
-        //cam.transform.position = transform.position + Quaternion.Euler(Vector3.up * rotY) * ( cam.transform.position - transform.position );
-        //print(transform.localPosition);
+        Vector3 dir = (transform.position - cam.transform.position);
+        dir.y = 0;
+        Quaternion toRot = Quaternion.LookRotation(dir);
         rb.MoveRotation(toRot);
-
-        rotX += lookUpDown.ReadValue<float>() * Time.deltaTime * lookUpSpeed;
-        rotX = Mathf.Clamp(rotX, -15, 30);
-        //cam.transform.rotation = Quaternion.Euler(-rotX, cam.transform.eulerAngles.y, cam.transform.eulerAngles.z);
 
         Vector2 rotXY = lookAround.ReadValue<Vector2>();
 
-        //Normalize the vector to have an uniform vector in whichever form it came from (I.E Gamepad, mouse, etc)
         Vector2 lookMovement = rotXY.normalized;
-        lookMovement.y = true ? -lookMovement.y : lookMovement.y;
+        lookMovement.y *= -1;
 
-        // This is because X axis is only contains between -180 and 180 instead of 0 and 1 like the Y axis
         lookMovement.x = lookMovement.x * 180f;
 
-        //Adjust axis values using look speed and Time.deltaTime so the look doesn't go faster if there is more FPS
         _freeLookComponent.m_XAxis.Value += lookMovement.x * lookUpSpeed * Time.deltaTime;
-        _freeLookComponent.m_YAxis.Value += lookMovement.y * lookLeftSpeed * Time.deltaTime;
+        _freeLookComponent.m_YAxis.Value += lookMovement.y * lookUpSpeed * Time.deltaTime;
     }
 
     private void PlayerBodyMovement()
