@@ -4,14 +4,19 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Zenject;
 using static Selectable;
 
 public class UI : MonoBehaviour
 {
     //  Dependencies
+    [Inject]
     public Player player { get; private set; }
     public PlayerControls playerControls { get; private set; }
+    [Inject]
     private WindowInfo wi { get; set; }
+    [Inject]
+    Camera mainCamera;
 
     //  UI elements
     [SerializeField]
@@ -31,14 +36,15 @@ public class UI : MonoBehaviour
     #region Unity Callbacks
     private void Awake()
     {
-        player = FindObjectOfType<Player>();
-        wi = FindObjectOfType<WindowInfo>(true);
+       // player = FindObjectOfType<Player>();
+       // wi = FindObjectOfType<WindowInfo>(true);
         playerControls = new PlayerControls();
 
         playerControls.Player.Click.canceled += OnClicked;
     }
     private void Start()
     {
+        Lock();
         wi.PromptPlayer("Game", "Hit Start to start the Game", WindowInfo.Response.Ok, StartTimer, "Start");
         //wi.PromptPlayer("Game", "Hit Start to start the Game", StartTimer, "Start");
     }
@@ -50,8 +56,9 @@ public class UI : MonoBehaviour
             currentSelected = null;
         }
 
-        Vector2 mousePosition = playerControls.UI.Point.ReadValue<Vector2>();
-        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+        //Vector2 mousePosition = playerControls.UI.Point.ReadValue<Vector2>();
+        //Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+        Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f,0));
         RaycastHit hitInfo;
 
         bool hit = Physics.Raycast(ray, out hitInfo, maxSelectingDistance, LayerMask.GetMask("Selectables"));
@@ -72,11 +79,17 @@ public class UI : MonoBehaviour
     public void Lock()
     {
         player.OnDisable();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         locked = true;
     }
     public void Unlock()
     {
         player.OnEnable();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         locked = false;
     }
     void OnClicked(InputAction.CallbackContext ctx)
@@ -114,8 +127,9 @@ public class UI : MonoBehaviour
     #region Timer Logic
     private void StartTimer(int i)
     {
+        Unlock();
         playerControls.Enable();
-        player.OnEnable();
+
         startTime = Time.time;
         StartCoroutine(Stopper());
         wi.Close();

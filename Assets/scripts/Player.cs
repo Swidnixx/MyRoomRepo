@@ -4,12 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 public class Player : MonoBehaviour
 {
     //  Dependencies
     [SerializeField] Camera cam;
     [SerializeField] CinemachineFreeLook _freeLookComponent;
+    [Inject]
     public WindowInfo windowInfo { get; private set; }
     public PlayerControls playerControls { get; private set; }      // Decide whether to create it Globally (one instance) or to create dynamically in each dependency ( each dep. has each 'pc' instance )?
 
@@ -55,7 +57,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         // Set Dependencies
-        windowInfo = FindObjectOfType<WindowInfo>(true);
+        //windowInfo = GameManager.instance.wi;
         playerControls = new PlayerControls();
 
         //cam = GetComponentInChildren<Camera>();
